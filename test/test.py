@@ -37,3 +37,29 @@ async def test_project(dut):
     clock = Clock(dut.clk, 10, units="us")
     #Start the clock
     cocotb.start_soon(clock.start())
+  # Run through reset sequence.  Start low, go high, go back to low. The test begins when the reset goes low.
+    dut._log.info("Reset")
+    #Set inputs for enable, ui_in and uio_in
+    dut.ena.value = 1
+    dut.ui_in.value = 0
+    dut.uio_in.value = 0
+    #Set reset to 0
+    dut.rst_n.value = 0
+    #wait 5 clock cycle
+    await ClockCycles(dut.clk, 5)
+    #Set reset to 1
+    dut.rst_n.value = 1
+    # wait for five clock cycles.
+    await ClockCycles(dut.clk, 5)
+    #Set reset to 0
+    dut.rst_n.value = 0
+    #True test begins here.
+    dut._log.info("Test project behavior")
+    #Compare output to theory for each clock cycle
+    for i in range(0,n_clock):
+    # Wait for one clock cycle to see the output values
+    	await ClockCycles(dut.clk, 1)
+    # The following assertion is just an example of how to check the output values.
+    # Test (assert) that we are getting the expected output. 
+    	assert dut.uo_out[0].value == out[i]
+
