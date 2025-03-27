@@ -80,8 +80,8 @@ counter <= counter + 1;
 if (counter == 24'd50000) begin // Adjust speed by changing the counter limit
 counter <= 0;
 // Update ball position
-if (ball_dir_x) ball_x <= ball_x + 1; else ball_x <= ball_x - 1;
-if (ball_dir_y) ball_y <= ball_y + 1; else ball_y <= ball_y - 1;
+  if (ball_dir_x[0]) ball_x <= ball_x + 1; else ball_x <= ball_x - 1;
+  if (ball_dir_y[0]) ball_y <= ball_y + 1; else ball_y <= ball_y - 1;
 
 
 // Check for collisions with screen edges
