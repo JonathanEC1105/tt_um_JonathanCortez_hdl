@@ -11,6 +11,8 @@
 
   "//": "Here are some of the variables you may want to change:",
 
+"DESIGN_NAME": "tt_um_jonathancortez_prbs31",
+  
   "VERILOG_FILES": [
     "src/project.v",
     "src/hvsync_generator.v"
