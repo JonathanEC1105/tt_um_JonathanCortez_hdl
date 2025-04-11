@@ -1,5 +1,5 @@
 `default_nettype none
-
+`include "hvsync_generator.v"
 
 module tt_um_vga_example(
    input wire [7:0] ui_in,
