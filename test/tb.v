@@ -8,8 +8,10 @@ module tb ();
 
   // Dump the signals to a VCD file. You can view it with gtkwave or surfer.
   initial begin
+    // Because the Makefile runs in the test/ dir, this writes test/tb.vcd at repo root
     $dumpfile("tb.vcd");
-    $dumpvars(0, tb);
+    // Limit dump scope to the DUT to keep file size reasonable
+    $dumpvars(0, dut);
     #1;
   end
 
@@ -22,20 +24,27 @@ module tb ();
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
+
 `ifdef GL_TEST
   wire VPWR = 1'b1;
   wire VGND = 1'b0;
 `endif
 
-  // Replace tt_um_example with your module name:
-  tt_um_vga_example (
+  // Known-good startup values (cocotb will drive over these)
+  initial begin
+    clk    = 1'b0;
+    rst_n  = 1'b0;
+    ena    = 1'b1;
+    ui_in  = 8'h00;
+    uio_in = 8'h00;
+  end
 
-      // Include power ports for the Gate Level test:
+  // DUT instance (instance name added: "dut")
+  tt_um_vga_example dut (
 `ifdef GL_TEST
       .VPWR(VPWR),
       .VGND(VGND),
 `endif
-
       .ui_in  (ui_in),    // Dedicated inputs
       .uo_out (uo_out),   // Dedicated outputs
       .uio_in (uio_in),   // IOs: Input path
