@@ -1,6 +1,6 @@
 # Tiny Tapeout project information
 project:
-  title:        "PRBS31 Generator"      # Project title
+  title:        "Jabulani Ball VGA Demo "      # Project title
   author:       "Jonathan Cortez"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Makes a Circle"      # One line description of what your project does
